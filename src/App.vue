@@ -13,6 +13,6 @@ export default {
 
 <style>
 #app{
-  background: #ececec;
+  /* background: #ececec; */
 }
 </style>

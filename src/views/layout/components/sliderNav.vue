@@ -10,8 +10,9 @@
         <a-breadcrumb-item><a href="">统计</a></a-breadcrumb-item>
       </a-breadcrumb>
       <ul class="login-user">
-        <li>用户中心 <a-icon type="down" /></li>
-        <li class="exit">退出</li>
+        <li>{{$store.state.userInfo.username}} <a-icon type="down" /></li>
+        <li></li>
+        <li class="exit" @click="out">退出</li>
       </ul>
       </div>
 
@@ -22,6 +23,14 @@ export default {
   methods: {
     toggleCollapsed() {
       this.$store.dispatch('changeCollapsed');
+    },
+    out() {
+      console.log('zzz');
+      this.$store.dispatch('outLogin');
+      console.log('dscrdd');
+      this.$router.push({
+        name: 'Login',
+      });
     },
   },
 };
