@@ -3,6 +3,7 @@
    <left-menu/>
    <div :class="{'right-container':true,'menu-unfold':$store.state.collapsed}">
    <slider-nav></slider-nav>
+   <router-view></router-view>
    </div>
   </div>
 </template>

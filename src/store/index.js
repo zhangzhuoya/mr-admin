@@ -10,6 +10,7 @@ export default new Vuex.Store({
     // 由于切换右侧导航的状态 false表示不闭合 true表示闭合
     collapsed: false,
     userInfo: getCookie(),
+    routeMenu: [],
   },
   mutations: {
     changeCollapsed(state) {
@@ -25,6 +26,14 @@ export default new Vuex.Store({
         role: '',
         email: '',
       };
+    },
+    /**
+     * 展示所筛选的路由
+     * @param {*} state
+     * @param {*} data 展示路由的数组
+     */
+    setRouteMenu(state, data) {
+      state.routeMenu = data;
     },
   },
   actions: {
@@ -42,6 +51,9 @@ export default new Vuex.Store({
       console.log('ggggg');
       removeCookie();
       console.log(getCookie());
+    },
+    setRouteMenu({ commit }, data) {
+      commit('setRouteMenu', data);
     },
   },
   modules: {

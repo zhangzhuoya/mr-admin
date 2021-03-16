@@ -7,26 +7,34 @@
         theme="dark"
         :inline-collapsed="$store.state.collapsed"
       >
-        <a-sub-menu key="sub1">
-          <span slot="title"><a-icon type="mail" /><span>首页</span></span>
-          <a-menu-item key="5">
-         {{$store.state.collapsed}}
+      <template v-for="item in $store.state.routeMenu">
+
+        <a-sub-menu :key="item.meta.title" v-show="item.meta.hidden===false">
+          <span slot="title">
+          <a-icon :type="item.meta.icon" />
+          <span>{{item.meta.title}}</span>
+          </span>
+          <template v-for="i in item.children">
+<a-menu-item :key="i.meta.title" v-if="i.meta.hidden===false">
+              <router-link :to="{name:i.name}">
+              <a-icon :type="i.meta.icon" />
+            {{i.meta.title}}
+            </router-link>
+
           </a-menu-item>
+          </template>
+
         </a-sub-menu>
-        <a-sub-menu key="sub2">
-          <span slot="title"><a-icon type="appstore" /><span>商品</span></span>
-          <a-menu-item key="9">
-            Option 9
-          </a-menu-item>
-          <a-menu-item key="10">
-            Option 10
-          </a-menu-item>
-        </a-sub-menu>
+      </template>
+
       </a-menu>
     </div>
 </template>
 <script>
 export default {
+  created() {
+    console.log();
+  },
 
 };
 </script>
