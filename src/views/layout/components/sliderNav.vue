@@ -6,8 +6,12 @@
         <a-icon :type="$store.state.collapsed ? 'menu-unfold' : 'menu-fold'" />
       </a-button>
       <a-breadcrumb>
-        <a-breadcrumb-item>首页</a-breadcrumb-item>
-        <a-breadcrumb-item><a href="">统计</a></a-breadcrumb-item>
+        <a-breadcrumb-item>{{currentRoute[0]?currentRoute[0].meta.title:""}}</a-breadcrumb-item>
+        <a-breadcrumb-item>
+          <router-link :to="{name:currentRoute[1].name}" href="">
+          {{currentRoute[1]?currentRoute[1].meta.title:""}}
+          </router-link>
+        </a-breadcrumb-item>
       </a-breadcrumb>
       <ul class="login-user">
         <li>{{$store.state.userInfo.username}} <a-icon type="down" /></li>
@@ -20,10 +24,16 @@
 </template>
 <script>
 export default {
+  data() {
+    return {
+      currentRoute: this.$router.currentRoute.matched,
+    };
+  },
   methods: {
     toggleCollapsed() {
       this.$store.dispatch('changeCollapsed');
     },
+
     out() {
       console.log('zzz');
       this.$store.dispatch('outLogin');
@@ -32,6 +42,15 @@ export default {
         name: 'Login',
       });
     },
+
+  },
+  watch: {
+    $route() {
+      this.currentRoute = this.$router.currentRoute.matched;
+    },
+  },
+  created() {
+    console.log(this.$router.currentRoute.matched);
   },
 };
 </script>
